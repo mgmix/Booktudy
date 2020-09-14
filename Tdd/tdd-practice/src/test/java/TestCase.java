@@ -33,6 +33,13 @@ public class TestCase {
         Assert.assertFalse(Money.dollar(10).equals(Money.franc(10)));
     }
 
+    @Test
+    public void testCurrency() {
+        Assert.assertEquals("USD", Money.dollar(1).currency());
+        Assert.assertEquals("CHF", Money.franc(1).currency());
+        Assert.assertFalse(Money.franc(1).currency().equals("USD"));
+        Assert.assertFalse(Money.dollar(1).currency().equals("CHF"));
+    }
 
 
 }
