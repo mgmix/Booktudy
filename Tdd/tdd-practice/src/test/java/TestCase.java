@@ -47,5 +47,29 @@ public class TestCase {
         Assert.assertEquals(Money.dollar(10), reduced);
     }
 
+    @Test
+    public void testPlusReturnsSum() {
+        Money five = Money.dollar(5);
+        Expression result = five.plus(five);
+        Sum sum = (Sum) result;
+        Assert.assertEquals(five, sum.augend);
+        Assert.assertEquals(five, sum.addend);
+    }
+
+    @Test
+    public void testBankReduceSum() {
+        Expression sum = new Sum(Money.dollar(5), Money.dollar(10));
+        Bank bank = new Bank();
+        Money result = bank.reduce(sum, "USD");
+        Assert.assertEquals(Money.dollar(15), result);
+    }
+
+    @Test
+    public void testReduceMoney() {
+        Bank bank = new Bank();
+        Money result = bank.reduce(Money.dollar(1), "USD");
+        Assert.assertEquals(Money.dollar(1), result);
+    }
+
 
 }
