@@ -12,10 +12,11 @@
 - [ ] equal null
 - [ ] equal object
 - [x] ~~5CHF x 2 = 10CHF~~
-- [ ] Dollar / Franc 중복
+- [x] Dollar / Franc 중복
 - [x] ~~공용 equals~~
-- [ ] 공용 times
+- [x] 공용 times
 - [x] ~~Franc 과 Dollar 비교~~
+- [x] ~~testFrancMultiplication 제거~~
 
 
  
