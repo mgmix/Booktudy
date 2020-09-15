@@ -80,4 +80,28 @@ public class TestCase {
         Assert.assertEquals(Money.dollar(10), result);
     }
 
+    @Test
+    public void testSumPlusMoney() {
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        // Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+        // 이렇게 표현하는게 Sum 을 테스트하는데 직접적인 의도를 드러낼 수 있음
+        Expression sum = fiveBucks.plus(tenFrancs).plus(fiveBucks);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(sum, "USD");
+        Assert.assertEquals(Money.dollar(15), result);
+    }
+
+    @Test
+    public void testSumTimes() {
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Expression times = new Sum(fiveBucks, tenFrancs).times(2);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(times, "USD");
+        Assert.assertEquals(Money.dollar(20), result);
+    }
+
 }
