@@ -4,20 +4,6 @@ import org.junit.Test;
 public class TestCase {
 
     @Test
-    public void testDollarMultiplication() {
-        Money five = Money.dollar(5);
-        Assert.assertEquals(Money.dollar(10), five.times(2));
-        Assert.assertEquals(Money.dollar(15), five.times(3));
-    }
-
-    @Test
-    public void testFrancMultiplication() {
-        Money five = Money.franc(5);
-        Assert.assertEquals(Money.franc(10), five.times(2));
-        Assert.assertEquals(Money.franc(15), five.times(3));
-    }
-
-    @Test
     public void testMultiplication() {
         Money five = Money.dollar(5);
         Assert.assertEquals(Money.dollar(10), five.times(2));
@@ -82,6 +68,16 @@ public class TestCase {
     @Test
     public void testIdentityRate() {
         Assert.assertEquals(1, new Bank().rate("USD", "USD"));
+    }
+
+    @Test
+    public void testMixedAddition() {
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
+        Assert.assertEquals(Money.dollar(10), result);
     }
 
 }
